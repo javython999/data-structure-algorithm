@@ -16,7 +16,8 @@ public class Triangle {
 
         //tiangleLeftBottom(n);
         //triangleLeftUp(n);
-        triangleRightUp(n);
+        //triangleRightUp(n);
+        triangleRightBottom(n);
     }
 
     private static void tiangleLeftBottom(int n) {
@@ -50,6 +51,22 @@ public class Triangle {
             }
 
             for (int j = 0; j <= n - i; j++) {
+                System.out.print('*');
+            }
+
+            if (i != n) {
+                System.out.println();
+            }
+        }
+    }
+
+    private static void triangleRightBottom(int n) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < n - i; j++) {
+                System.out.print(' ');
+            }
+
+            for (int j = 0; j <= i - 1; j++) {
                 System.out.print('*');
             }
 
