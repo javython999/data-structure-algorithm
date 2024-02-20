@@ -14,7 +14,8 @@ public class Pyramid {
             n = stdIn.nextInt();
         } while (n <= 0);
 
-        pyramid(n);
+        //pyramid(n);
+        pyramidNumber(n);
     }
 
     private static void pyramid(int n) {
@@ -25,6 +26,22 @@ public class Pyramid {
 
             for (int j = 1; j <= (i-1)*2+1; j++) {
                 System.out.print('*');
+            }
+
+            if (i != n) {
+                System.out.println();
+            }
+        }
+    }
+
+    private static void pyramidNumber(int n) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(' ');
+            }
+
+            for (int j = 1; j <= (i-1)*2+1; j++) {
+                System.out.print(i%10);
             }
 
             if (i != n) {
