@@ -19,7 +19,8 @@ public class SeqSearchSen {
         System.out.print("검색할 값: ");
         int ky = stdIn.nextInt();
 
-        int idx = seqSearchSen(x, num, ky);
+        //int idx = seqSearchSen(x, num, ky);
+        int idx = seqSearchSenFor(x, num, ky);
 
         if (idx == -1) {
             System.out.println("해당 값의 요소가 존재하지 않습니다.");
@@ -38,6 +39,16 @@ public class SeqSearchSen {
             i++;
         }
 
+        return i == n ? -1 : i;
+    }
+
+    static int seqSearchSenFor(int[] a, int n, int key) {
+        int i;
+        a[n] = key;
+
+        for (i = 0; a[i] != key; i++) {
+            ;
+        }
         return i == n ? -1 : i;
     }
 }
