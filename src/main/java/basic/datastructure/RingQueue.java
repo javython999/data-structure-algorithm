@@ -3,27 +3,27 @@ package basic.datastructure;
 import basic.datastructure.QueueError.EmptyQueueException;
 import basic.datastructure.QueueError.OverflowQueueException;
 
-public class IntArrayRingQueue {
+public class RingQueue<E> {
 
-    private int[] que;
+    private E[] que;
     private int capacity;
     private int num;
     private int front;
     private int rear;
 
-    public IntArrayRingQueue(int mexLen) {
+    public RingQueue(int mexLen) {
         num = 0;
         front = 0;
         rear = 0;
         capacity = mexLen;
         try {
-            que = new int[mexLen];
+            que = (E[]) new Object[mexLen];
         } catch (OutOfMemoryError e) {
             capacity = 0;
         }
     }
 
-    public int enque(int x) throws OverflowQueueException {
+    public E enque(E x) throws OverflowQueueException {
         if (num >= capacity) {
             throw new OverflowQueueException();
         }
@@ -38,12 +38,12 @@ public class IntArrayRingQueue {
         return x;
     }
 
-    public int dequeue() throws EmptyQueueException {
+    public E dequeue() throws EmptyQueueException {
         if (num <= 0) {
             throw new EmptyQueueException();
         }
 
-        int x = que[front++];
+        E x = que[front++];
         num--;
 
         if (front == capacity) {
@@ -53,7 +53,7 @@ public class IntArrayRingQueue {
         return x;
     }
 
-    public int peek() throws EmptyQueueException {
+    public E peek() throws EmptyQueueException {
         if (num <= 0) {
             throw new EmptyQueueException();
         }
@@ -61,7 +61,7 @@ public class IntArrayRingQueue {
         return que[front];
     }
 
-    public int indexOf(int x) {
+    public int indexOf(E x) {
         for (int i = 0; i < num; i++) {
             int idx = (i + front) % capacity;
 
@@ -73,7 +73,7 @@ public class IntArrayRingQueue {
         return -1;
     }
 
-    public int search(int x) {
+    public int search(E x) {
         for (int i = 0; i < num; i++) {
             if (que[(i + front) % capacity] == x) {
                 return i + 1;
