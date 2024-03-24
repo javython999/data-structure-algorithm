@@ -17,7 +17,7 @@ public class BubbleSort {
             x[i] = stdIn.nextInt();
         }
 
-        bubleSort(x, nx);
+        bubbleSort2(x, nx);
 
         System.out.println("오름차순으로 정렬 했습니다.");
         for (int i = 0; i < nx; i++) {
@@ -25,7 +25,7 @@ public class BubbleSort {
         }
     }
 
-    private static void bubleSort(int[] x, int nx) {
+    private static void bubbleSort(int[] x, int nx) {
         for (int i = 0; i < nx - 1; i++) {
             for (int j = nx - 1; j > i; j--) {
                 if (x[j - 1] > x[j]) {
@@ -39,5 +39,17 @@ public class BubbleSort {
         int t = a[idx1];
         a[idx1] = a[idx2];
         a[idx2] = t;
+    }
+
+
+    // 5 4 3 2 1
+    private static void bubbleSort2(int[] x, int nx) {
+        for (int i = 0; i < nx; i++) {
+            for (int j = i + 1; j < nx; j++) {
+                if (x[i] > x[j]) {
+                    swap(x, j, i);
+                }
+            }
+        }
     }
 }
