@@ -1,5 +1,6 @@
 package basic.algorithm;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class BubbleSort {
@@ -17,7 +18,7 @@ public class BubbleSort {
             x[i] = stdIn.nextInt();
         }
 
-        bubbleSort4(x, nx);
+        cocktailSort(x, nx);
 
         System.out.println("오름차순으로 정렬 했습니다.");
         for (int i = 0; i < nx; i++) {
@@ -81,6 +82,34 @@ public class BubbleSort {
             }
 
             k = last;
+        }
+    }
+
+    private static void cocktailSort(int[] x, int nx) {
+        int left = 0;
+        int right = nx - 1;
+        int last = right;
+
+        while (left < right) {
+            for (int j = right; j > left; j--) {
+                if(x[j-1] > x[j]) {
+                    swap(x, j-1, j);
+                    last = j;
+                }
+                System.out.println(Arrays.toString(x));
+            }
+            left = last;
+
+            for(int j = left; j < right; j++) {
+                if (x[j] > x[j + 1]) {
+                    swap(x, j, j + 1);
+                    last = j;
+                }
+                System.out.println(Arrays.toString(x));
+            }
+            right = last;
+
+
         }
     }
 }
