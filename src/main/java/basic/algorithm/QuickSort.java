@@ -1,5 +1,7 @@
 package basic.algorithm;
 
+import basic.datastructure.IntStack;
+
 import java.util.Scanner;
 
 import static basic.algorithm.Swap.swap;
@@ -19,7 +21,7 @@ public class QuickSort {
             x[i] = stdIn.nextInt();
         }
 
-        quickSort(x, 0, nx - 1);
+        quickSort3(x, 0, nx - 1);
 
         System.out.println("오름차순으로 정렬했습니다.");
         for (int i = 0; i < nx; i++) {
@@ -28,7 +30,14 @@ public class QuickSort {
         }
     }
 
-    static void quickSort(int[] a, int left, int right) {
+    static int sort3Elem(int[] x, int a, int b, int c) {
+        if (x[b] < x[a]) swap(x, b, a);
+        if (x[c] < x[b]) swap(x, c, b);
+        if (x[b] < x[a]) swap(x, b, a);
+        return b;
+    }
+
+    static void quickSort1(int[] a, int left, int right) {
         int pl = left;
         int pr = right;
         int x = a[(pl + pr) / 2];
@@ -42,7 +51,63 @@ public class QuickSort {
             }
         } while (pl <= pr);
 
-        if (left < pr) quickSort(a, left, pr);
-        if (pl < right) quickSort(a, pl, right);
+        if (left < pr) quickSort1(a, left, pr);
+        if (pl < right) quickSort1(a, pl, right);
+    }
+
+    static void quickSort2(int[] a, int left, int right) {
+        IntStack lstack = new IntStack(right - left + 1);
+        IntStack rstack = new IntStack(right - left + 1);
+
+        lstack.push(left);
+        rstack.push(right);
+
+        while (!lstack.isEmpty()) {
+            int pl = left = lstack.pop();
+            int pr = right = rstack.pop();
+            int x = a[(left + right) / 2];
+
+            do {
+                while (a[pl] < x) pl++;
+                while (a[pr] > x) pr--;
+
+                if (pl <= pr) {
+                    swap(a, pl++, pr--);
+                }
+            } while (pl <= pr);
+
+            if (left < pr) {
+                lstack.push(left);
+                rstack.push(pr);
+            }
+
+            if (pl < right) {
+                lstack.push(pl);
+                rstack.push(right);
+            }
+        }
+    }
+
+    static void quickSort3(int[] a, int left, int right) {
+        int pl = left;
+        int pr = right;
+        int m = sort3Elem(a, pl, (pl + pr) / 2, pr);
+        int x = a[m];
+
+        swap(a, m, right - 1);
+        pl++;
+        pr -= 2;
+
+        do {
+            while (a[pl] < x) pl++;
+            while (a[pr] > x) pr--;
+
+            if (pl <= pr) {
+                swap(a, pl++, pr--);
+            }
+        } while (pl <= pr);
+
+        if (left < pr) quickSort3(a, left, pr);
+        if (pl < right) quickSort3(a, pl, right);
     }
 }
